@@ -4,7 +4,15 @@ const { patch } = require("../routes/api.js");
 
 //create Patient model class
 class Patient {
-  //create static all method
+
+  /**
+   * creating static all method for get all data from table patients
+   * @param {resolve} param used when the promise done
+   * @param {reject} param used when the promise can't be done
+   * @param {query} param object who save queries for database
+   * @param {err} param
+   * @param {result} param
+   */
   static all(){
     return new Promise((resolve, reject) => {
         const query = "SELECT * from patients"
@@ -13,9 +21,18 @@ class Patient {
           err ? reject(err) : resolve(result);
         });
     });
-}
+  }
 
-static async create(data) {
+  /**
+   * creating static create method for created writed data to database
+   * @param {data} req data patient want to input
+   * @param {resolve} param used when the promise done
+   * @param {reject} param used when the promise can't be done
+   * @param {query} param object who save queries for database
+   * @param {err} param
+   * @param {result} param 
+   */
+  static async create(data) {
     const id = await new Promise((resolve, reject) => {
       const sql = "INSERT INTO patients SET ?";
       db.query(sql, data, (err, results) => {
@@ -27,6 +44,15 @@ static async create(data) {
     return patient;
   }
 
+  /**
+   * creating static find method for search patient based on id
+   * @param {id} req patient id want to search
+   * @param {resolve} param used when the promise done
+   * @param {reject} param used when the promise can't be done
+   * @param {query} param object who save queries for database
+   * @param {err} param
+   * @param {result} param 
+   */
   static find(id) {
     return new Promise((resolve, reject) => {
       const sql = "SELECT * FROM patients WHERE id = ?";
@@ -37,6 +63,16 @@ static async create(data) {
     });
   }
 
+  /**
+   * creating static update method for updating writed data to database
+   * @param {id} req patient id want to search
+   * @param {data} req data patient want to input
+   * @param {resolve} param used when the promise done
+   * @param {reject} param used when the promise can't be done
+   * @param {query} param object who save queries for database
+   * @param {err} param
+   * @param {result} param 
+   */
   static async update(id, data) {
     await new Promise((resolve, reject) => {
       const query = "UPDATE patients SET ? WHERE id = ?";
@@ -50,6 +86,15 @@ static async create(data) {
     return patient;
   }
 
+  /**
+   * creating static delete method for deleting data from database
+   * @param {id} req patient id want to search
+   * @param {resolve} param used when the promise done
+   * @param {reject} param used when the promise can't be done
+   * @param {query} param object who save queries for database
+   * @param {err} param
+   * @param {result} param 
+   */
   static delete(id) {
     return new Promise((resolve, reject) => {
       const query = "DELETE FROM patients WHERE id = ?";
@@ -60,6 +105,15 @@ static async create(data) {
     });
   }
 
+  /**
+   * creating static search method for search data based on name of patient
+   * @param {name} req patient name want to search
+   * @param {resolve} param used when the promise done
+   * @param {reject} param used when the promise can't be done
+   * @param {query} param object who save queries for database
+   * @param {err} param
+   * @param {result} param 
+   */
   static search(name) {
     return new Promise((resolve, reject) => {
       const query = "SELECT * FROM patients WHERE name LIKE ?";

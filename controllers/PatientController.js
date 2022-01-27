@@ -3,7 +3,13 @@ const Patient = require("../models/Patient.js");
 
 //create PatientController class
 class PatientController{
-    //index method
+
+    /**
+     * creating index method for show all data from patients table from database
+     * @param {any} req for recieving data
+     * @param {any} res for giving response
+     * @returns for giving back a response like status and json data
+     */
     async index(req, res) {
         //call static all method
         const patients = await Patient.all();
@@ -24,7 +30,13 @@ class PatientController{
         }
     }
 
-    //store method
+    /**
+     * creating store method for input data patient to database
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {create} method for creating data where data has been inputed on form
+     * @returns for giving back a response like status and json data
+     */
     async store(req, res) {
  
         const patients = await Patient.create(req.body);
@@ -37,7 +49,14 @@ class PatientController{
         return res.status(201).json(data);
     }
 
-    //show method
+    /**
+     * creating show method to showing detail only 1 data searched by id
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {id} req patient id want to search
+     * @param {find} method for searching id
+     * @returns for giving back a response like status and json data
+     */
     async show(req, res) {
         const {id} = req.params;
         const patient = await Patient.find(id);
@@ -58,7 +77,15 @@ class PatientController{
         }
     }
 
-    //update method
+    /**
+     * creating update method to edit patient data from database
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {id} req patient id want to search
+     * @param {find} method for searching id
+     * @param {update} method for updating edited data
+     * @returns for giving back a response like status and json data
+     */
     async update(req, res) {
         const {id} = req.params;
         const patient = await Patient.find(id);
@@ -81,7 +108,15 @@ class PatientController{
         }
     }
 
-    //destroy method
+    /**
+     * creating destroy method to delete data from database
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {id} req patient id want to search
+     * @param {find} method for searching id
+     * @param {delete} method for deleting data from table
+     * @returns for giving back a response like status and json data
+     */
     async destroy(req, res) {
         const {id} = req.params;
         const patient = await Patient.find(id);
@@ -103,7 +138,14 @@ class PatientController{
         }
     }
 
-    //search method by name
+    /**
+     * creating search method by name
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {name} req patient name want to search
+     * @param {search} method for searching patient name
+     * @returns for giving back a response like status and json data
+     */
     async search(req, res) {
         const {name} = req.params;
         const patients = await Patient.search(name);
@@ -124,6 +166,13 @@ class PatientController{
         }
     }
 
+    /**
+     * creating patient data based on "positive" status
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {findByStatus} method used for search patient data based on writed status
+     * @returns for giving back a response like status and json data
+     */
     async positive(req, res) {
         const patients = await Patient.findByStatus("positive");
 
@@ -137,6 +186,13 @@ class PatientController{
         }
     }
 
+    /**
+     * creating patient data based on "recovered" status
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {findByStatus} method used for search patient data based on writed status
+     * @returns for giving back a response like status and json data
+     */
     async recovered(req, res) {
         const patients = await Patient.findByStatus("recovered");
 
@@ -150,6 +206,13 @@ class PatientController{
         }
     }
 
+    /**
+     * creating patient data based on "dead" status
+     * @param {*} req for recieving data
+     * @param {*} res for giving status response
+     * @param {findByStatus} method used for search patient data based on writed status
+     * @returns for giving back a response like status and json data
+     */
     async dead(req, res) {
         const patients = await Patient.findByStatus("dead");
 
